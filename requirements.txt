@@ -1,0 +1,4 @@
+facebook-sdk
+opencv-python
+argparse
+numpy
