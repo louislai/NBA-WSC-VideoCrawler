@@ -8,7 +8,7 @@ from os import path, remove
 from tqdm import tqdm
 
 OUT_DIR = "/Users/louis/Downloads/wsc"
-
+LOG_FILE = 'log.txt'
 
 class Crawler:
 
@@ -17,8 +17,9 @@ class Crawler:
         self.graph = facebook.GraphAPI(FACEBOOK_ACCESS_TOKEN)
         self.out_dir = out_dir
         self.since = since
+        self.log = open(path.join(OUT_DIR, LOG_FILE), 'w')
 
-    def is_wsc_video(vid_file_path):
+    def is_wsc_video(self, vid_file_path):
         cap = cv2.VideoCapture(vid_file_path)
         _, frame = cap.read()
 
@@ -61,7 +62,7 @@ class Crawler:
             pbar.update()
         pbar.close()
 
-        print('Downloading videos')
+        print('Downloading %d videos' % len(vid_ids))
         pbar = tqdm(total=len(vid_ids))
         for vid_id in vid_ids:
             self.retrieve_video(vid_id)
@@ -75,8 +76,6 @@ class Crawler:
         video_ids = []
         while True:
             try:
-                # Perform some action on each post in the collection we receive from
-                # Facebook.
                 for video in videos['data']:
                     video_ids.append(video['id'])
 
@@ -89,10 +88,10 @@ class Crawler:
         return video_ids
 
     def retrieve_video(self, vid_id):
-        video = self.graph.request(path='%s?fields=source,title' % vid_id, method='GET')
-        print(vid_id, video)
+        video = self.graph.request(path='%s?fields=source,title,description' % vid_id, method='GET')
         r = requests.get(video['source'])
-        video_path = path.join(self.out_dir, '%s.mp4' % video['title'].replace(' ', ''))
+        base_name = video['title'] if video.get('title') else video['description']
+        video_path = path.join(self.out_dir, '%s.mp4' % base_name.replace(' ', '').replace('/', '').replace('\\', ''))
         with open(video_path, 'wb') as f:
             f.write(r.content)
 
@@ -102,6 +101,8 @@ class Crawler:
                 remove(video_path)
             except OSError:
                 pass
+        else:
+            self.log.write(str(video), '\n')
 
 
 
