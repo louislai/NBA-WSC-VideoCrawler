@@ -7,7 +7,8 @@ import datetime
 from os import path, remove
 from tqdm import tqdm
 
-out_dir = "/Users/louis/Downloads/wsc"
+OUT_DIR = "/Users/louis/Downloads/wsc"
+
 
 class Crawler:
 
@@ -89,8 +90,9 @@ class Crawler:
 
     def retrieve_video(self, vid_id):
         video = self.graph.request(path='%s?fields=source,title' % vid_id, method='GET')
+        print(vid_id, video)
         r = requests.get(video['source'])
-        video_path = path.join(self.out_dir, '%s.mp4' % video['title'].replace(" ", ""))
+        video_path = path.join(self.out_dir, '%s.mp4' % video['title'].replace(' ', ''))
         with open(video_path, 'wb') as f:
             f.write(r.content)
 
@@ -103,5 +105,5 @@ class Crawler:
 
 
 
-crawler = Crawler(out_dir=out_dir, since=(2017, 5))
+crawler = Crawler(out_dir=OUT_DIR, since=(2017, 5))
 crawler.crawl()
