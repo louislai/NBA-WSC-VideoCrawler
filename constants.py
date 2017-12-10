@@ -1,0 +1,4 @@
+NBA_FACEBOOK_PAGE_ID = 8245623462
+FACEBOOK_GRAPH_API_ENDPOINT = 'https://graph.facebook.com/v2.11'
+# This token has no permissions to anything private, so safe to use
+FACEBOOK_ACCESS_TOKEN = 'EAACEdEose0cBANLGAjSRwMjW0fveEzHJRkj9BkBs1ZAjmIbNaFmS2YNHHIZAkkPL7ZAyKBZCEPvZAj6QAk06yQqYtjscWy3DGqTjDmqMkmfNW5RIuaIpLcdLXJ4IGaNE0CghCEWsq6rmkZB7u0G3GlHUMDVIdfdTTKDtybbgliKv8ZBRpXXBg7Bt8zxVQgHeB4ZD'
