@@ -102,9 +102,9 @@ class Crawler:
             except OSError:
                 pass
         else:
-            self.log.write(str(video), '\n')
+            self.log.write('%s\n' % str(video))
 
 
 
-crawler = Crawler(out_dir=OUT_DIR, since=(2017, 5))
+crawler = Crawler(out_dir=OUT_DIR, since=(2017, 11))
 crawler.crawl()

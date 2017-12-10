@@ -11,4 +11,4 @@ Recommended to use Pycharm to open the project.
 A temporary token usually expires after 2 hours.
 2. In `crawler.py`, set the directory where the videos are going to be downloaded to with the variable `OUT_DIR`.
 
-By default, only videos from May 2017 are going to be downloaded.
+By default, only videos from Nov 2017 are going to be downloaded.
