@@ -1,6 +1,6 @@
 ### Requirement
 
-Python 3
+Python 3, OpenCV
 
 ### Running instructions
 
